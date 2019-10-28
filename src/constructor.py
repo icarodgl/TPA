@@ -94,7 +94,7 @@ def run_sort(algorithm, input, output, alg_name, times):
             if max_time < dif_time:
                 max_time = dif_time
             print("Terminou: %s(%s),  %d/%d tempo: %f" % (alg_name, input[5:-4], i + 1, times, dif_time))
-            # data_manager.save_file("%s_%s" % (alg_name, output), data)
+            data_manager.save_file("%s_%s" % (alg_name, output), data)
             print("Ordenado? : %r" % data_manager.is_sorted(data))
     if not isTimeout:
         print("max: %f min: %f med: %f" % (max_time, min_time, (med_time / times)))
