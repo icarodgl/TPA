@@ -1,5 +1,4 @@
 from timeout import timeout
-from data_manager import is_sorted
 
 
 @timeout(900)
@@ -9,26 +8,22 @@ def run(V):
 
 def timSort(vector):
     size = len(vector)
-    n = 16
-    for i in range(0, size, n):
-        insertionSort(vector, i, i + n)
-    aply_merge(vector, n)
-
-
-def aply_merge(vector, s):
-    size = len(vector)
+    n = 32
+    s = n
     while s < size:
         for left in range(0, size, 2 * s):
             mid = left + s
             right = min((left + 2 * s), size)
+            if s == n:
+                insertion_Sort(vector, left, mid)
+                insertion_Sort(vector, mid, right)
             merge(vector, left, mid, right)
 
         s = s * 2
 
 
 def insertionSort(lista, l, r):
-    if r > len(lista):
-        r = len(lista) - 1
+    r = min(r, len(lista) - 1)
     for i in range(l, r + 1):
         j = i
         while ((lista[j].uid < lista[j - 1].uid) and (j > 0)):
@@ -37,6 +32,16 @@ def insertionSort(lista, l, r):
             lista[j - 1] = aux
             j = j - 1
 
+
+def insertion_Sort(arr, left, right):
+    right = min(right, len(arr) - 1)
+    for i in range(left + 1, right + 1):
+        temp = arr[i]
+        j = i - 1
+        while arr[j].uid > temp.uid and j >= left:
+            arr[j + 1] = arr[j]
+            j -= 1
+        arr[j + 1] = temp
 
 def merge(V, l, m, r):
     i = 0
