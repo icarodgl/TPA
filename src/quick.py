@@ -1,17 +1,37 @@
-import timeout
+from timeout import timeout
 
 
-@timeout.timeout(900)
+@timeout(900)
 def run(V):
-    quicksort(V)
+    f = len(V)
+    QuickSort(V,0,f)
 
+def QuickSort(X, IniVet, FimVet):
 
-def quicksort(l):
-    if l:
-        left = [x for x in l if x.uid < l[0].uid]
-        right = [x for x in l if x.uid > l[0].uid]
-        if len(left) > 1:
-            left = quicksort(left)
-        if len(right) > 1:
-            right = quicksort(right)
-        return left + [l[0]] * l.count(l[0]) + right
+        i = IniVet
+        j = FimVet
+        pivo = X[(IniVet + FimVet) // 2]
+
+        while (i <= j):
+            while (X[i] < pivo):
+                i = i + 1
+            # fimEnquanto
+            while (X[j] > pivo):
+                j = j - 1
+            # fimEnquanto
+            if (i <= j):
+                aux = X[i]
+                X[i] = X[j]
+                X[j] = aux
+                i = i + 1
+                j = j - 1
+            # fimSe
+            # fimEnquanto
+
+            if (IniVet < j):
+                QuickSort(X, IniVet, j)
+            # fimSe
+            if (i < FimVet):
+                QuickSort(X, i, FimVet)
+            # fimSe
+# fimProcedimento

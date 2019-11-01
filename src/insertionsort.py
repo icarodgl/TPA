@@ -16,3 +16,13 @@ def insertionSort(lista):
             j = j - 1
 
     return lista
+
+def insertion_Sort(arr):
+
+    for i in range(1, len(arr)):
+        temp = arr[i]
+        j = i - 1
+        while arr[j].uid > temp.uid and j >= 0:
+            arr[j + 1] = arr[j]
+            j -= 1
+        arr[j + 1] = temp

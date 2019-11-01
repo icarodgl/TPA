@@ -1,15 +1,16 @@
 from argparse import ArgumentParser
-import time, heap, selection, data_manager, quick, merge, insertionsort, tim
+import time, heap, selection, data_manager, quick, merge, insertionsort, tim, introsort as intro
 import signal
 
-_ALGORITHMS_list = ['tim']
+_ALGORITHMS_list = ['selection','insertion']
 _ALGORITHMS_dict = {
     "selection": selection.run,
     "insertion": insertionsort.run,
     "merge": merge.run,
     "quick": quick.run,
     "heap": heap.run,
-    "tim": tim.run
+    "tim": tim.run,
+    "intro": intro.run
 }
 _TIMEOUT_dict = {
     "selection": 6,
@@ -17,7 +18,8 @@ _TIMEOUT_dict = {
     "merge": 6,
     "quick": 6,
     "heap": 6,
-    "tim": 6
+    "tim": 6,
+    "intro":6
 }
 
 
@@ -65,6 +67,7 @@ def run_sort(algorithm, input, output, alg_name, times):
     records = []
     # signal.signal(signal.SIGALRM, handler)  # only linux
     times = 1 if times == None else times
+
     if int(input[-5]) > _TIMEOUT_dict[alg_name]:
         isTimeout = True
         print("pulou: %s tamanho: %s" % (alg_name, input[-5]))
