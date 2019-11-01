@@ -1,8 +1,7 @@
 from argparse import ArgumentParser
 import time, heap, selection, data_manager, quick, merge, insertionsort, tim, introsort as intro
-import signal
 
-_ALGORITHMS_list = ['selection','insertion']
+_ALGORITHMS_list = ['selection', 'insertion', 'merge', 'quick', 'heap', 'tim', 'intro']
 _ALGORITHMS_dict = {
     "selection": selection.run,
     "insertion": insertionsort.run,
@@ -19,7 +18,7 @@ _TIMEOUT_dict = {
     "quick": 6,
     "heap": 6,
     "tim": 6,
-    "intro":6
+    "intro": 6
 }
 
 
@@ -57,7 +56,6 @@ def run_all(input, output, times=1):
 
 def run_sort(algorithm, input, output, alg_name, times):
     print("runsort: " + alg_name)
-    timeout = 900  # standard 15 minutes
     i_time = 0
     f_time = 0
     max_time = 0
@@ -65,7 +63,6 @@ def run_sort(algorithm, input, output, alg_name, times):
     med_time = 0
     isTimeout = False
     records = []
-    # signal.signal(signal.SIGALRM, handler)  # only linux
     times = 1 if times == None else times
 
     if int(input[-5]) > _TIMEOUT_dict[alg_name]:
@@ -79,10 +76,7 @@ def run_sort(algorithm, input, output, alg_name, times):
             data = data_manager.open_input_file(input)
             try:
                 i_time = time.time()
-
-                # signal.alarm(timeout)
                 algorithm(data)
-                # signal.alarm(0)
                 f_time = time.time()
             except Exception as err:
                 print("Erro no Sort: %s" % (err))
